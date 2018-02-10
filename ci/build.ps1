@@ -20,6 +20,13 @@ function bower-install {
   # ... is it time yet :)
 }
 
+function dotnet-build-dotnet-swagger {
+  # Build dotnet-swagger first as it produces a nupkg that's consumed by test/WebSites/CliExample
+  Push-Location src/dotnet-swagger
+  dotnet-build
+  Pop-Location
+}
+
 function dotnet-build {
   if ($VersionSuffix.Length -gt 0) {
     dotnet build -c Release --version-suffix $VersionSuffix
@@ -38,7 +45,7 @@ function dotnet-pack {
   }
 }
 
-@( "bower-install", "dotnet-build", "dotnet-pack" ) | ForEach-Object {
+@( "bower-install", "dotnet-build-dotnet-swagger", "dotnet-build", "dotnet-pack" ) | ForEach-Object {
   echo ""
   echo "***** $_ *****"
   echo ""

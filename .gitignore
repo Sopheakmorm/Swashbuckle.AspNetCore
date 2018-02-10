@@ -11,3 +11,5 @@ artifacts/
 *.nuget.props
 .DS_Store
 Thumbs.db
+nupkgs/
+test/WebSites/CliExample/wwwroot/api-docs/v1/*.json
